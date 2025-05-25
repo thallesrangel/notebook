@@ -99,6 +99,10 @@
             </div>
         </div>
     </div>
+    
+    <button id="btn-indice" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIndice">
+        Índice
+    </button>
 
   <div class="row mt-4">
     <div class="col-12 d-flex align-items-center">
@@ -106,11 +110,31 @@
         <h5 class="mb-0 px-3 text-center">Notebook paragraphs</h5>
         <div class="flex-grow-1 border-top"></div>
     </div>
+    
     <div class="row" id="practice-list"></div>
 </div>
 
 @include('notebook.modalEditNotebook')
 @include('notebook.modalAddNotebook')
 
-@endsection
+<div class="modal fade" id="modalIndice" tabindex="-1" aria-labelledby="modalIndiceLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalIndiceLabel">Indice</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div id="index-left" class="col-4">
+            </div>
 
+            <div id="index-right" class="col-8">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection

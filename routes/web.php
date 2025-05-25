@@ -27,6 +27,7 @@ Route::prefix('notebook')->group(function () {
 Route::prefix('practice')->group(function () {
     Route::get('/total/{notebook_id}/pdf', [NotebookController::class, 'generatePdfTotal'])->name('notebook.pdf');
     Route::get('/partial/{notebook_paragraph_id}/pdf', [NotebookController::class, 'generatePdfPartial']);
+    Route::get('/get-notebook-paragraph/{id}', [ NotebookController::class, 'getNotebookParagraphById' ]);
 });
 
 Route::post('/notebooks', [NotebookController::class, 'store']);

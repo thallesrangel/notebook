@@ -275,7 +275,7 @@ function renderPracticeItem(item) {
         <div class="card mt-4 mb-4">
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <small class="text-muted">${item.created_at_formatted ?? ''}</small>
+                    <small class="text-muted">${item.created_at ?? ''}</small>
                     <span class="badge bg-primary">${item.CEFR}</span>
                 </div>
 
@@ -479,4 +479,118 @@ $(document).on('click', '.speak-feedback', function () {
     utterance.onend = () => console.log('Leitura finalizada');
 
     window.speechSynthesis.speak(utterance);
+});
+
+
+
+
+
+
+
+
+
+
+
+$('#modalIndice').on('shown.bs.modal', function () {
+    $.ajax({
+        url: `${APP_URL}/notebook/list/${$('#select-notebooks').val()}`,
+        method: 'GET',
+        success: function (response) {
+            $('#index-left').empty();
+
+            if (response.items && response.items.length > 0) {
+                const $ul = $('<ul class="list-group"></ul>');
+
+                response.items.forEach(item => {
+                    const preview = item.content.length > 20 ? item.content.substring(0, 20) + '...' : item.content;
+
+                    const formattedDate = moment(item.created_at).format('DD/MM/YYYY HH:mm');
+
+                    const $li = $(`
+                        <li 
+                            class="list-group-item d-flex justify-content-between align-items-center notebook-paragraph-item" 
+                            data-notebook-paragraph-id="${item.id}"
+                        >
+                            <span>${preview}</span>
+                            <small class="text-muted">${formattedDate}</small>
+                        </li>
+                    `);
+
+                    $ul.append($li);
+                });
+
+                $('#index-left').append($ul);
+            } else {
+                $('#index-left').html(`
+                    <div class="text-center py-4">
+                        <p class="fs-5 mb-2">No practices found</p>
+                    </div>
+                `);
+            }
+        },
+        error: function () {
+            alert('Erro ao carregar práticas.');
+        }
+    });
+});
+
+$(document).on('click', '.notebook-paragraph-item', function () {
+
+    $('.notebook-paragraph-item').removeClass('active');
+    $(this).addClass('active');
+
+    const paragraphId = $(this).data('notebook-paragraph-id');
+
+    $.ajax({
+        url: `${APP_URL}/practice/get-notebook-paragraph/${paragraphId}`,
+        method: 'GET',
+        success: function (response) {
+            const item = response.paragraph;
+
+            const html = `
+                <div class="card mt-4 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <small class="text-muted">${item.created_at_formatted ?? ''}</small>
+                            <span class="badge bg-primary">${item.CEFR ?? ''}</span>
+                        </div>
+
+                        <h6 class="text-uppercase text-secondary fw-bold mb-2">Original text</h6>
+                        <p class="card-text mb-4">${item.content}</p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-success fw-bold mb-0">Corrected text</h6>
+                            <button class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center speak-corrected-content" 
+                                    data-id="${item.id}" title="Ouvir texto corrigido" 
+                                    style="width: 36px; height: 36px;">
+                                <i class="bi bi-volume-up fs-5"></i>
+                            </button>
+                        </div>
+                        <p class="card-text corrected-content-text mb-4" data-id="${item.id}">${item.corrected_content}</p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-uppercase text-warning fw-bold mb-0">Feedback</h6>
+                            <button class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center speak-feedback" 
+                                    data-id="${item.id}" title="Ouvir feedback" 
+                                    style="width: 36px; height: 36px;">
+                                <i class="bi bi-volume-up fs-5"></i>
+                            </button>
+                        </div>
+                        <p class="card-text feedback-text mb-4" data-id="${item.id}">${item.feedback}</p>
+
+                        <div class="text-end">
+                            <a href="${APP_URL}/practice/partial/${item.id}/pdf" target="_blank" class="btn btn-sm btn-primary rounded-pill px-4 py-2">
+                                PDF <i class="bi bi-download me-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('#index-right').html(html);
+        },
+        error: function () {
+            alert('Erro ao carregar parágrafo.');
+        }
+    });
 });

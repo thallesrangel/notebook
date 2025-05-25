@@ -207,4 +207,19 @@ class NotebookController extends Controller
         ]);
     }
 
+    public function getNotebookParagraphById($id)
+    {
+        // Busca o parágrafo pelo ID
+        $paragraph = NotebookParagraphs::find($id);
+
+        if (!$paragraph) {
+            return response()->json(['message' => 'Paragraph not found.'], 404);
+        }
+
+        // Retorna como JSON
+        return response()->json([
+            'paragraph' => $paragraph,
+        ]);
+    }
+
 }
