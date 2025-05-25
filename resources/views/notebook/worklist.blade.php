@@ -39,16 +39,16 @@
                         <div class="d-flex align-items-center">
                             <label title="Isso muda vocabulário, tom, correções e velocidade de resposta." for="ai-personality" class="me-2 mb-0">AI Personality</label>
                             <select id="ai-personality" class="form-select form-select-sm" style="width: auto;">
-                                <option value="professor">Professor</option>
-                                <option value="prestativo">Prestativo</option>
-                                <option value="divertida">Divertida</option>
-                                <option value="objetiva">Objetiva</option>
-                                <option value="paciente">Paciente</option>
-                                <option value="motivacional">Motivacional</option>
-                                <option value="rigorosa">Rigorosa</option>
-                                <option value="interativa">Interativa</option>
-                                <option value="explicativa">Explicativa</option>
-                                <option value="resumida">Resumida</option>
+                               <option value="teacher">Teacher</option>
+                                <option value="helpful">Helpful</option>
+                                <option value="fun">Fun</option>
+                                <option value="objective">Objective</option>
+                                <option value="patient">Patient</option>
+                                <option value="motivational">Motivational</option>
+                                <option value="strict">Strict</option>
+                                <option value="interactive">Interactive</option>
+                                <option value="explanatory">Explanatory</option>
+                                <option value="summarized">Summarized</option>
                             </select>                              
                         </div>
                     </div>
@@ -109,48 +109,8 @@
     <div class="row" id="practice-list"></div>
 </div>
 
-<!-- Modal Editar -->
-<div class="modal fade" id="modalEditNotebook" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <h5 class="modal-title">Edit Notebook</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <input type="text" id="edit-notebook-name" class="form-control" placeholder="Nome do Notebook">
-      </div>
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" id="confirm-edit-notebook" class="btn btn-primary">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div>
+@include('notebook.modalEditNotebook')
+@include('notebook.modalAddNotebook')
 
-<!-- Modal Adicionar -->
-<div class="modal fade" id="modalAddNotebook" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <h5 class="modal-title">Add Notebook</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <input type="text" id="add-notebook-name" class="form-control" placeholder="Nome do Notebook">
-      </div>
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" id="confirm-add-notebook" class="btn btn-primary">Adicionar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-    @endsection
+@endsection
 
