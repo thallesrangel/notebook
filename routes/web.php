@@ -35,3 +35,7 @@ Route::put('/notebooks/{id}', [NotebookController::class, 'update']);
 Route::delete('/notebooks/{id}', [NotebookController::class, 'destroy']);
 Route::get('/notebooks-list', [NotebookController::class, 'list']);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
+Route::prefix('profile')->group(function () {
+    Route::put('/', [UserController::class, 'update'])->name('profile.update');
+});
