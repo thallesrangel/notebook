@@ -4,25 +4,25 @@ import './bootstrap';
 
 $(function () {
     const darkModeKey = 'darkModeEnabled';
-  
+
     // Verifica se o dark mode estava ativado anteriormente
     if (localStorage.getItem(darkModeKey) === 'true') {
-      $('body').addClass('dark-mode');
-      $('#toggleDark').html('<i class="bi bi-brightness-high-fill me-1"></i>');
+        $('body').addClass('dark-mode');
+        $('#toggleDark').html('<i class="bi bi-brightness-high-fill me-1"></i>');
     }
-  
+
     $('#toggleDark').on('click', function () {
-      const isDark = $('body').toggleClass('dark-mode').hasClass('dark-mode');
-  
-      // Atualiza texto do botão
-      $(this).html(
-        isDark
-          ? '<i class="bi bi-brightness-high-fill me-1"></i>'
-          : '<i class="bi bi-moon-fill me-1"></i>'
-      );
-  
-      // Salva preferência no localStorage
-      localStorage.setItem(darkModeKey, isDark);
+        const isDark = $('body').toggleClass('dark-mode').hasClass('dark-mode');
+
+        // Atualiza texto do botão
+        $(this).html(
+            isDark
+                ? '<i class="bi bi-brightness-high-fill me-1"></i>'
+                : '<i class="bi bi-moon-fill me-1"></i>'
+        );
+
+        // Salva preferência no localStorage
+        localStorage.setItem(darkModeKey, isDark);
     });
 });
 
@@ -149,16 +149,32 @@ $(document).ready(function () {
     });
 
 
-    $('#btn-delete-notebook').on('click', function (e) {
-        e.preventDefault();
-        const $select = $('#select-notebooks');
-        const notebookId = $select.val();
-        const $selectedOption = $select.find('option:selected');
-        const notebookName = $selectedOption.text();
+    $(function () {
+        let notebookIdToDelete = null;
 
-        if (confirm('Tem certeza que deseja excluir o notebook: ' + notebookName + '?')) {
+        $('#btn-delete-notebook').on('click', function (e) {
+            e.preventDefault();
+            const $select = $('#select-notebooks');
+            notebookIdToDelete = $select.val();
+
+            if (!notebookIdToDelete) {
+                alert('Selecione um notebook para excluir.');
+                return;
+            }
+
+            const notebookName = $select.find('option:selected').text();
+            $('#notebookNameToDelete').text(notebookName);
+
+            // Abrir o modal Bootstrap
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            modal.show();
+        });
+
+        $('#confirmDeleteBtn').on('click', function () {
+            if (!notebookIdToDelete) return;
+
             $.ajax({
-                url: '/notebooks/' + notebookId,
+                url: '/notebooks/' + notebookIdToDelete,
                 method: 'DELETE',
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content')
@@ -166,17 +182,30 @@ $(document).ready(function () {
                 success: function (response) {
                     alert_success('Sucesso', 'Notebook excluído');
 
-                    $selectedOption.remove();
+                    // Remover opção do select
+                    const $select = $('#select-notebooks');
+                    $select.find('option[value="' + notebookIdToDelete + '"]').remove();
+
+                    // Selecionar a primeira opção e carregar práticas
                     $select.find('option:first').prop('selected', true);
                     const newNotebookId = $select.val();
                     loadPractices(newNotebookId);
+
+                    // Fechar o modal
+                    const modalEl = document.getElementById('confirmDeleteModal');
+                    const modal = bootstrap.Modal.getInstance(modalEl);
+                    modal.hide();
+
+                    // Resetar variável
+                    notebookIdToDelete = null;
                 },
                 error: function (err) {
                     alert_error('Erro', 'Erro ao excluir notebook.');
                 }
             });
-        }
+        });
     });
+
 
 });
 
