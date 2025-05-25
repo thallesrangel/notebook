@@ -57,7 +57,6 @@ body.dark-mode .btn:not([class*="btn-"]):hover {
     border-color: #555;
 }
 
-
 body.dark-mode label {
     color: #e0e0e0;
 }
@@ -90,7 +89,7 @@ body.dark-mode .text-dark {
 }
 
 body.dark-mode .list-group-item {
-    background-color: #2c2c2c; /* tom escuro */
+    background-color: #2c2c2c;
     color: #ffffff;
     border-color: #444;
 }
@@ -139,21 +138,20 @@ body.dark-mode .modal-content textarea.form-control:focus {
     box-shadow: none;
 }
 
-
 body.dark-mode .text-muted {
     color: #ffffff !important;
 }
 
 body.dark-mode .alert-warning {
-    color: #f9e076; /* texto - amarelo suave no dark */
+    color: #f9e076;
     background-color: transparent; 
-    border: 2px solid #f9e076; /* borda - mesma cor do texto */
+    border: 2px solid #f9e076;
 }
 
 body.dark-mode .alert-success {
-    color: #75b798; /* texto - verde suave no dark */
+    color: #75b798;
     background-color: transparent;
-    border: 2px solid #75b798; /* borda - mesma cor do texto */
+    border: 2px solid #75b798;
 }
 
 .notebook-paragraph-item.active {

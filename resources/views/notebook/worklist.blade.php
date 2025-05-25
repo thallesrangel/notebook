@@ -100,9 +100,13 @@
         </div>
     </div>
     
-    <button id="btn-indice" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIndice">
-        Índice
-    </button>
+     <div class="row text-center">
+        <div class="col-12">
+            <button id="btn-indice" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalIndice">
+                Notebook index
+            </button>
+        </div>
+    </div>
 
   <div class="row mt-4">
     <div class="col-12 d-flex align-items-center">
@@ -121,7 +125,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalIndiceLabel">Indice</h5>
+        <h5 class="modal-title" id="modalIndiceLabel">Notebook index</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
       <div class="modal-body">

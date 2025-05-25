@@ -536,6 +536,8 @@ $('#modalIndice').on('shown.bs.modal', function () {
 
 $(document).on('click', '.notebook-paragraph-item', function () {
 
+    $('#loadingModal').modal('show');
+
     $('.notebook-paragraph-item').removeClass('active');
     $(this).addClass('active');
 
@@ -588,8 +590,11 @@ $(document).on('click', '.notebook-paragraph-item', function () {
             `;
 
             $('#index-right').html(html);
+
+            $('#loadingModal').modal('hide');
         },
         error: function () {
+            $('#loadingModal').modal('hide');
             alert('Erro ao carregar parágrafo.');
         }
     });
