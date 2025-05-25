@@ -28,6 +28,7 @@ class NotebookController extends Controller
         ]);
 
         $notebook = new Notebooks();
+        $notebook->user_id = 1;
         $notebook->name = $request->name;
         $notebook->slug = Str::slug($request->name);
         $notebook->save();
@@ -147,6 +148,7 @@ class NotebookController extends Controller
         ]);
 
         $practice = new NotebookParagraphs();
+        $practice->user_id = 1;
         $practice->notebook_id = $validated['notebook_id'];
         $practice->content = $validated['original'];
         $practice->corrected_content = $validated['corrigido'];

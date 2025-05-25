@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use App\Models\Notebooks;
+use App\Models\Users;
 
-class NotebookSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,12 @@ class NotebookSeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'My first book',
+            'Name Test',
         ];
 
         foreach ($categories as $name) {
-            Notebooks::create([
-                'user_id' => 1,
+            Users::create([
                 'name' => $name,
-                'slug' => Str::slug($name)
             ]);
         }
     }

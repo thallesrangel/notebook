@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notebook_paragraphs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('notebook_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->text('content')->nullable();
             $table->text('corrected_content')->nullable();
             $table->text('feedback')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
 
         Schema::table('notebook_paragraphs', function ($table) {
             $table->foreign('notebook_id')->references('id')->on('notebooks')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

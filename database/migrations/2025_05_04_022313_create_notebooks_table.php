@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('notebooks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('slug');
             $table->boolean('deleted')->default(0);
             $table->timestamps();
+        });
+
+        Schema::table('notebooks', function ($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

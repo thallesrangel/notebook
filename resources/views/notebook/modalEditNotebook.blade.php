@@ -6,11 +6,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <input type="text" id="edit-notebook-name" class="form-control" placeholder="Nome do Notebook">
+        <input type="text" id="edit-notebook-name" class="form-control" placeholder="Name">
       </div>
       <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" id="confirm-edit-notebook" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="confirm-edit-notebook" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
