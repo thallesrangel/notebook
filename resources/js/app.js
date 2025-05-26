@@ -304,7 +304,7 @@ function renderPracticeItem(item) {
         <div class="card mt-4 mb-4">
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <small class="text-muted">${item.created_at ?? ''}</small>
+                    <small class="text-muted">${item.created_at ? moment(item.created_at).format('YYYY-MM-DD HH:mm:ss') : ''}</small>
                     <span class="badge bg-primary">${item.CEFR}</span>
                 </div>
 

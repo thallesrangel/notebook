@@ -52,3 +52,7 @@ Você pode alterar o modelo e prompt no arquivo `NotebookController.php`, na lin
 
 ## Bater um papo
 `https://www.linkedin.com/in/rangelthr/`
+
+
+## NEWS - "Duolingo CEO says AI is a better teacher than humans—but schools will still exist ‘because you still need childcare’"
+https://fortune.com/2025/05/20/duolingo-ai-teacher-schools-childcare/
