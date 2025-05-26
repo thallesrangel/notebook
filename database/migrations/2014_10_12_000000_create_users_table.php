@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('feedback_language', ['portuguese', 'english'])->default('portuguese');
             $table->timestamps();
         });
     }

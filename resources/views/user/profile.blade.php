@@ -14,6 +14,14 @@
       <input type="text" class="form-control" id="full-name" name="full_name" value="{{ $user->name ?? '' }}" placeholder="Enter your full name" required>
     </div>
 
+    <div class="mb-3">
+      <label for="feedback-language" class="form-label">Language Feedback</label>
+      <select class="form-select" id="feedback-language" name="feedback_language" required>
+        <option value="portugues" {{ $user->feedback_language == 'portugues' ? 'selected' : '' }}>Português</option>
+        <option value="english" {{ $user->feedback_language == 'english' ? 'selected' : '' }}>English</option>
+      </select>
+    </div>
+    
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 

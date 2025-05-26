@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NotebookParagraphs;
 use App\Models\Notebooks;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
@@ -65,10 +66,10 @@ class NotebookController extends Controller
         ]);
     }
 
-
-
     public function checkText(Request $request)
     {
+        $user = Users::find(1);
+
         $apiKey = env('CHATGPT_KEY');
         $model = 'gpt-4o-mini';
         $temperature = 1;
@@ -77,12 +78,12 @@ class NotebookController extends Controller
         $personality = $request->ai_personality;
 
         $prompt = <<<EOT
-        Você é um professor de inglês com uma personalidade {$personality}. Sua tarefa é corrigir o texto enviado pelo aluno (mantendo a correção em inglês) e fornecer um feedback separado, claro e construtivo **em português**.
+        Você é um professor de inglês com uma personalidade {$personality}. Sua tarefa é corrigir o texto enviado pelo aluno (mantendo a correção em inglês) e fornecer um feedback separado, claro e construtivo **em {$user->feedback_language}**.
         Explique claramente, se necessário, alguma correção.    
         Retorne no seguinte formato JSON:
         {
         "corrigido": "<texto corrigido em inglês>",
-        "feedback": "<comentário construtivo e breve em português sobre o texto apenas se necessário.>"
+        "feedback": "<comentário construtivo e breve em {$user->feedback_language} sobre o texto apenas se necessário.>"
         "CEFR": "<Classificação do nível da frase corrigida: A1, A2, B1, B2, C1, C2>"
         }
         EOT;
